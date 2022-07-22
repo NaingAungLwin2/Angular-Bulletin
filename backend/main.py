@@ -21,12 +21,19 @@ def login():
    
         json_data = request.json
         userEmail = json_data['email']
-        # userPassword = json_data['password']
+        userPassword = json_data['password']
         conn = mysql.connect()
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM user_table WHERE email=%s", userEmail)
         row = cursor.fetchone()
         print('+++++++++++++++++>the input Email is ', row[2])
+        print('++++++++++++++++++>password',row[3])
+        if(row and row[3] == userPassword):
+            print('Right')
+            status = True
+        else:
+            status = False
+        return jsonify(status)
         cursor.close()
         conn.close()
     
