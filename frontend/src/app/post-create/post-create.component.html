@@ -1,0 +1,48 @@
+
+<div class="card-con">
+    <form class="example-form container" [formGroup]="PostForm" novalidate>
+        <h2 class="head">Post Create</h2>
+
+        <mat-form-field  class="example-full-width" appearance="standard" >
+            <mat-label>Title</mat-label>
+           
+            <input matInput placeholder="Title" formControlName="title"  [(ngModel)]="postTitle" >
+            
+              <mat-error *ngIf="PostForm.controls['title'].errors?.['required']">Title Required</mat-error>
+            
+          </mat-form-field>
+
+          
+
+        <mat-form-field class="example-full-width"  appearance="standard">
+          <mat-label>Description</mat-label>
+         
+          <textarea matInput placeholder="Enter Your UserName" formControlName="description"  [(ngModel)]="postDescription" required></textarea>
+          
+            <mat-error *ngIf="PostForm.controls['description'].errors?.['required']">Description Required</mat-error>
+          
+        </mat-form-field>
+
+        
+        <mat-form-field appearance="standard"  class="example-full-width">
+          <mat-label>Select Status</mat-label>
+          <mat-select formControlName="status">
+            <mat-option value="1">Active</mat-option>
+            <mat-option value="0">Inactive</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        
+
+    
+        
+        <button mat-raised-button color="primary" type="submit" class="btn" [disabled]="!PostForm.valid" (click)="addPost()">Create</button>
+      
+          
+      </form>
+     
+    </div>
+       
+    
+
+

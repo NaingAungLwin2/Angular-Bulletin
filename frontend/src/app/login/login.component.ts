@@ -3,6 +3,7 @@ import { FormGroup,  FormBuilder,  Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../service/user.service';
 import { LoginAuthService } from '../service/login.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,12 +20,14 @@ export class LoginComponent implements OnInit {
   userid = '1';
   constructor(private fg: FormBuilder,private router: Router,private userService:UserService,private loginService : LoginAuthService) {
   this.createForm();
-  localStorage.clear();
+  sessionStorage.clear();
+  this.loginService.logout();
   }
 
  
 createForm(){
-    this.loginForm = this.fg.group({ email : ['', Validators.required], password : ['', Validators.required]})
+    this.loginForm = this.fg.group({ email : ['', Validators.required,Validators.email], 
+    password : ['', Validators.required]})
    
 }
 
@@ -32,12 +35,22 @@ login(): void {
     // this.loginService.logout();
     // localStorage.setItem('token', 'thisisjusttoken')
     this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).then(res => {
-      if (res) {
+      if (res[0]) {
         console.log("Login Success");
-        this.router.navigateByUrl('users');
+        sessionStorage.setItem('userRole', res[1])
+        sessionStorage.setItem('userId', res[2])
+        
+      
+        this.router.navigateByUrl('dashboard');
+        
+      }
+      else{
+        alert('User Not Found');
       }
     }).catch(error => {
       console.log('error ', error);
+    
+      alert('User Not Found');
       // this.authFailureMessage = this.clientMsg.APPLICATION_ERROR.AUTH;
     });
   }

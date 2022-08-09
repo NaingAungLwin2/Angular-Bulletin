@@ -1,0 +1,31 @@
+<mat-toolbar *ngIf="isLoggedInPage$ | async as checklogin" color="primary">
+  <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button> -->
+
+  <a routerLink="/dashboard" class="logo">SCM Bulletin Board</a>
+
+  <button mat-raised-button color="primary" routerLink="userlists" [disabled]="role == '0'" class="btn">UserLists </button>
+
+
+  <button mat-raised-button color="primary" routerLink="post_lists" class=" btn">PostLists</button>
+
+  <span class="example-spacer"></span>
+
+  <span><button mat-raised-button color="primary" type="submit" class="btn" (click)="profile(id)" class="btn">Profile</button></span>
+
+  <span><button (click)="logout()" mat-raised-button color="warn" type="submit" class="btn" class="btn">LogOut</button>
+  </span>
+
+
+
+
+</mat-toolbar>
+
+
+<script>
+  function autoRefresh() {
+    window.location = window.location.href;
+  }
+  setInterval('autoRefresh()', 1000);
+</script>

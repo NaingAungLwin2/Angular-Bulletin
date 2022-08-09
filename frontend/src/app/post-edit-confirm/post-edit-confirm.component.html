@@ -1,0 +1,55 @@
+<!-- <form action="">
+  <div class="row">
+    <mat-list role="list">
+      <mat-list-item role="listitem">Status</mat-list-item>
+      <mat-list-item role="listitem">Title</mat-list-item>
+      <mat-list-item role="listitem">Description</mat-list-item>
+
+
+    </mat-list>
+
+    <mat-list role="list">
+      <mat-list-item role="listitem" *ngIf="poststatus == '1'">Active</mat-list-item>
+      <mat-list-item role="listitem" *ngIf="poststatus == '0'">Inactive</mat-list-item>
+      <mat-list-item role="listitem">{{ posttitle }}</mat-list-item>
+      <mat-list-item role="listitem">{{ postdescription }}</mat-list-item>
+
+
+    </mat-list>
+  </div>
+</form>
+<button mat-raised-button color="primary" type="button" class="btn" (click)="postEdit()">Update</button>
+<button mat-raised-button color="warn" type="submit" class="btn" routerLink="/post-edit">Cancel</button> -->
+
+
+<div class="card">
+  <h2 class="head">Post Edit</h2>
+
+<div class="container">
+  
+  <mat-list role="list-left">
+ 
+    
+    <mat-list-item role="listitem" class="list-left">Title</mat-list-item>
+    <mat-list-item role="listitem" class="list-left">Description</mat-list-item>
+    <mat-list-item role="listitem" class="list-left">Status</mat-list-item>
+    
+   
+    <button  mat-raised-button color="primary" type="button" class="btn-edit" (click)="postEdit()">Update</button>
+  </mat-list>
+
+  <mat-list role="list-right">
+
+    
+    <mat-list-item role="listitem" class="list-right">{{ posttitle }}</mat-list-item>
+    <mat-list-item role="listitem" class="list-right">{{ postdescription }}</mat-list-item>
+    
+    <mat-list-item role="listitem" *ngIf="poststatus == '1'" class="list-right">Active</mat-list-item>
+    <mat-list-item role="listitem" *ngIf="poststatus == '0'" class="list-right">Inactive</mat-list-item>
+    <button  mat-raised-button color="warn" type="submit" class="btn-cancle" routerLink="/post-edit">Cancel</button>
+    
+  </mat-list>
+</div>
+
+
+</div>

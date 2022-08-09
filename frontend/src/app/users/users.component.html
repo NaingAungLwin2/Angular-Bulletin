@@ -1,9 +1,15 @@
 <div class="example-container mat-elevation-z8">
-    <h2>Corona Virus Cases List</h2>
+    
     <div class="example-loading-shade">
     </div>
     <div class="button-row">
+        
 
+
+        <button routerLink="/userlists" mat-raised-button color="primary" [disabled]="role ==='0'" class="btn">UserLists</button>
+        <button routerLink="/user_add" mat-raised-button color="primary" [disabled]="role ==='0'" class="btn">User Create</button>
+        <button routerLink="/post_create"  mat-raised-button color="primary" class="btn">PostCreate</button>
+        <button routerLink="/csvupload"  mat-raised-button color="primary" class="btn">CSV Upload</button>
         
     </div>
     <div class="mat-elevation-z8">

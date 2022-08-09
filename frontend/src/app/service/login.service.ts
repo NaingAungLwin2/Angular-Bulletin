@@ -10,6 +10,8 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class LoginAuthService {
+  public loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  
 
   private apiPath = 'login';
   private loginToken = "";
@@ -23,8 +25,7 @@ export class LoginAuthService {
     private http: HttpClient,
     protected router: Router,
   ) {
-    this.token = String(localStorage.getItem('token'));
-    // this.user = JSON.parse(localStorage.getItem('user')) as User;
+   
   }
 
   login(email: string, password: string): Promise<any> {
@@ -49,31 +50,36 @@ export class LoginAuthService {
     this.currentUserInfo.next(data);
   }
 
-  public logout(): any {
+  logout(): any {
     this.clearAll();
-    this.router.navigate(['/']);
+    this.loggedIn.next(false);
+   
+    this.router.navigate(['']);
   }
 
-  isAuthenticated(): boolean {
-    return this.token !== 'null' ? true : false;
+isLoggedIn() {
+    console.log('----- Check LoggedIn -------');
+    console.log(sessionStorage.getItem('userRole'));
+    if (sessionStorage.getItem('userRole') != null) {
+      this.loggedIn.next(true);
+      return true;
+    } else {
+      this.loggedIn.next(false);
+      return false;
+      
+    }
   }
-
-  get token(): string {
-    return this.loginToken;
-  }
-
-  set token(tokenStr: string) {
-    this.loginToken = tokenStr;
-    localStorage.setItem('token', tokenStr);
+ 
+  get checklogin() {
+    return this.loggedIn.asObservable();
   }
 
   
   public clearAll(): any {
     this.loginToken = "";
-    this.token = "";
-    // this.loginUser = null;
-    // this.user = null;
-    localStorage.clear();
+    sessionStorage.clear();
   }
 
+  
+  
 }

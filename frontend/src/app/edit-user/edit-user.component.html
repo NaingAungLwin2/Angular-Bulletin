@@ -1,0 +1,129 @@
+<div class="container">
+<h2 class="head">User Edit</h2>
+<div class="card-con">
+  <div class="card_img">
+    <img alt="user-image" [src]="prevImagePath" *ngIf="!url" >
+    <img alt="user-image"[src]="url" *ngIf="url">
+</div>
+
+<form class="example-form container" [formGroup]="UserForm">
+    
+   
+    
+
+    
+
+    <mat-form-field class="example-full-width" appearance="standard">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Your Name" name="name" id="name" formControlName="name" [(ngModel)]="user.name">
+      <mat-error *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="invalid-feedback">
+        <mat-error *ngIf="name?.errors?.['required']">
+          This field is required.
+        </mat-error>
+        <mat-error *ngIf="name?.errors?.['minLength']">
+          Please insert name at least 2 characters.
+        </mat-error>
+        <mat-error *ngIf="name?.errors?.['maxLength']">
+          Name should be less than 25 characters.
+        </mat-error>
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field class="example-full-width" appearance="standard">
+
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Your Email" name="email" id="name" formControlName="email" [(ngModel)]="user.email" [value]="user.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+      <mat-error *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="invalid-feedback">
+        <mat-error *ngIf="email?.errors?.['required']">Email Required</mat-error>
+
+        <mat-error *ngIf="email?.errors?.['pattern']">Email Format Doesn`t Correct</mat-error>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="standard">
+      <mat-label>Phone</mat-label>
+
+      <input matInput type="phone" placeholder="Your Phone" name="phone" id="phone" formControlName="phone" pattern="^[0-9]*$" maxlength="11" minlength="11" [(ngModel)]="user.phone">
+      <mat-error *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="invalid-feedback">
+        <mat-error *ngIf="phone?.errors?.['required']">Phone Required</mat-error>
+
+        <mat-error *ngIf="phone?.errors?.['pattern']">Phone Format Doesn`t Correct</mat-error>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Phone</mat-label>
+          <input matInput placeholder="09xxxxxxxxx" name="phone" id="phone" formControlName="phone" [(ngModel)]="user.phone">
+          <mat-error *ngIf="UserForm.controls['phone'].invalid && (UserForm.controls['phone'].dirty || UserForm.controls['phone'].touched)" class="invalid-feedback">
+          <mat-error *ngIf="UserForm.controls['phone'].errors?.['required']">
+              This field is required.
+          </mat-error>
+          <mat-error *ngIf="UserForm.controls['phone'].errors?.['pattern']">
+            Please insert 11 digits.
+        </mat-error>
+          </mat-error>
+      </mat-form-field> -->
+
+
+
+
+    <mat-form-field class="example-full-width" appearance="standard">
+      <mat-label>Address</mat-label>
+      <textarea matInput placeholder="Your Address" name="address" id="address" formControlName="address" [(ngModel)]="user.address">
+      </textarea>
+      <mat-error *ngIf="address?.invalid && (address?.dirty || address?.touched)" class="invalid-feedback">
+        <mat-error *ngIf="address?.errors?.['required']">Address Required</mat-error>
+
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="standard" class="example-full-width">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" name="dob" formControlName="dob" [(ngModel)]="dobdate" max="{{todaydate}}">
+      <mat-error *ngIf="dob?.invalid && (dob?.dirty || dob?.touched)" class="invalid-feedback">
+        <mat-error *ngIf="dob?.errors?.['required']">Date Format Wrong</mat-error>
+      <mat-error *ngIf="dob?.errors?.['matDatepickerMax']">
+        Date is greater than today.
+       </mat-error >
+      </mat-error>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+
+
+
+    <mat-form-field appearance="standard" class="example-full-width">
+      <mat-label>Select Options</mat-label>
+
+      <mat-select formControlName="type" [(ngModel)]="nrtype">
+
+        <mat-option value="1" selected>Admin</mat-option>
+        <mat-option value="0">User</mat-option>
+      </mat-select>
+
+
+
+    </mat-form-field>
+
+
+    <a type="button" name="password" formControlName="password" (click)="passwordrest()">Password Reset</a>
+
+
+    <input #imageInput type="file" class="form-control" accept="image/*" placeholder="Select images" (change)="onChangeImage($event)">
+
+    
+
+    
+
+
+
+    <button mat-raised-button color="primary" type="submit" class="btn" [disabled]="UserForm.invalid" (click)="editUser()">Edit</button>
+
+
+  </form>
+
+</div>
+</div>
