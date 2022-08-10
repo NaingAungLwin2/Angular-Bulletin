@@ -3,7 +3,7 @@ import { UserService } from '../service/user.service';
 import { User } from 'model';
 import { Router } from '@angular/router';
 import { ParamDataService } from '../service/param-data.service';
-import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-edit-user-confirm',
@@ -44,10 +44,8 @@ export class EditUserConfirmComponent implements OnInit {
       name: this.username,
       email: this.useremail,
       dob:this.userdob,
-      
       phone:this.userphone,
       address:this.useraddress,
-     
       type:this.usertype,
       ownerid:this.userid,
       profile:this.profile
@@ -55,20 +53,11 @@ export class EditUserConfirmComponent implements OnInit {
     };
     
       this.userService.updateUser(user).subscribe((data) => {
-       
-        
-        this.users.unshift(data);
-        console.log(data)
-        sessionStorage.removeItem('url')
-        this.route.navigateByUrl('dashboard')
+      this.users.unshift(data);
+      sessionStorage.removeItem('url')
+      this.route.navigateByUrl('dashboard')
     }, error => {
       console.log('ERROR :: ', error);
     });
-  
-  
-  
   }
-  
-  
-
 }

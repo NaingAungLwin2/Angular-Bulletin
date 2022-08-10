@@ -12,15 +12,11 @@ import { LoginAuthService } from '../service/login.service';
 })
 export class PostEditComponent implements OnInit {
   id = sessionStorage.getItem('editpostid')!;
-  data = [];
-  logindata = [];
-  hide = true;
+  
   nrstatus : string = ''
   isLoadingResults = true;
   PostForm !: FormGroup;
   post : any = [];
-  
-  userid = '1';
   constructor(private fg:FormBuilder,private routes: Router,private postService:PostService,private loginService : LoginAuthService) {this.createForm() }
   
   ngOnInit(): void {
@@ -64,7 +60,7 @@ checkPost(post:string): void {
       alert('This post is already exist.')
     }
     else {
-      console.log('Same post ==> ',res)
+      
       this.routes.navigateByUrl('post-edit-confirm');
     }
   }).catch(error => {

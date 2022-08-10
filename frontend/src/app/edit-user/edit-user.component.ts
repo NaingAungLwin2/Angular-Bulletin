@@ -15,16 +15,12 @@ import * as moment from 'moment';
 export class EditUserComponent implements OnInit {
   public isGoodResolution: boolean = false;
   public imagePath: any;
-  public file: any;
+  
   public url: any;
-  data = [];
-  logindata = [];
-  hide = true;
-  isLoadingResults = true;
   UserForm !: FormGroup;
   dobdate : string = ''
   nrtype : string = ''
-  userid = '1';
+  
   updatedob : string = '';
   public user : any = [];
   date = new Date();
@@ -32,7 +28,7 @@ export class EditUserComponent implements OnInit {
 
   public prevImagePath : any;
   id = sessionStorage.getItem('editid')!;
-  constructor(private fg:FormBuilder,private routes: Router,private userService:UserService,private loginService : LoginAuthService,private UserSvc:UserListsService,private paramDataSvc:ParamDataService) {  
+  constructor(private routes: Router,private userService:UserService,private UserSvc:UserListsService,private paramDataSvc:ParamDataService) {  
     this.prevImagePath = "../../assets/tmp/"+ this.id + "/" + this.id + ".png";
     
     this.UserForm= new FormGroup({
@@ -45,11 +41,8 @@ export class EditUserComponent implements OnInit {
         Validators.required,
         Validators.email,
       ]),
-      
       dob: new FormControl(null,[
         Validators.required,
-        //Validators.pattern("^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2}$")
-        
       ]),
       phone: new FormControl(null,[
         Validators.required,
@@ -57,7 +50,6 @@ export class EditUserComponent implements OnInit {
       ]),
       address: new FormControl(null,[
         Validators.required,
-        
       ]),
       type: new FormControl(null,[
         Validators.required
@@ -91,25 +83,18 @@ export class EditUserComponent implements OnInit {
     return this.UserForm.get('phone')
   }
 
-
-
-  
-  
-
 getUserDetail(id:string) {
   this.UserSvc.getUserDetail(id).subscribe(user => {
-    
     this.user = user;
     this.dobdate = moment(this.user.dob).format('YYYY-MM-DD');
-    console.log(this.user.name)
-    console.log(this.user.phone)
+   
     if(this.user.type == '1'){
       this.nrtype = '1'
     }
     else{
       this.nrtype = '0'
     }
-  }, error => {
+  },error => {
     console.log('ERROR :: ', error);
   });
 }
@@ -117,17 +102,12 @@ editUser(){
  
   sessionStorage.setItem('name',this.UserForm.value.name);
   sessionStorage.setItem('email',this.UserForm.value.email);
-  
   sessionStorage.setItem('phone',this.UserForm.value.phone);
   sessionStorage.setItem('address',this.UserForm.value.address);
   sessionStorage.setItem('type',this.UserForm.value.type);
   this.updatedob = moment(this.UserForm.value.dob).format('YYYY-MM-DD')
-  
   sessionStorage.setItem('dob',this.updatedob)
-
   this.checkEmail(this.UserForm.value.email)
-
-  
 
 }
 passwordrest(){
@@ -148,13 +128,11 @@ onChangeImage(event: any) {
       location.reload()
   }else{
     sessionStorage.setItem('imageDetail', filesToUpload)
-    const file = filesToUpload[0] as HTMLInputElement;
     Img.src = URL.createObjectURL(filesToUpload[0]);
     Img.onload = (e: any) => {
       const height = e.path[0].height;
       const width = e.path[0].width;
-      if ( width < 1000 && height < 900) {
-        
+      if (width < 1000 && height < 900) {
         this.isGoodResolution = false;
         this.url = '';
       } else {
@@ -179,12 +157,10 @@ onChangeImage(event: any) {
 checkEmail(email:string): void {
   this.userService.checkEmailUpdate(email).then(res => {
     if (res) {
-      console.log('Same email ==> ',res);
-      alert('This email is already exist.')
+    alert('This email is already exist.')
     }
     else {
-      console.log('Same email ==> ',res)
-      this.routes.navigateByUrl('edit-user-confirm');
+    this.routes.navigateByUrl('edit-user-confirm');
     }
   }).catch(error => {
     console.log('error ', error);

@@ -4,10 +4,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UserListsService } from '../service/user-lists.service';
 import { MatDialog } from '@angular/material/dialog';
 import { User } from 'model';
-import { Dialog } from '@angular/cdk/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormGroup,FormBuilder } from '@angular/forms';
+
 import { Router } from '@angular/router';
 
 import * as moment from 'moment';
@@ -23,21 +22,21 @@ export class UserListsComponent implements OnInit {
   public dataSource = new MatTableDataSource<User>();
   public resp : string = ''; 
   public userid = sessionStorage.getItem('userId')
-  searchName : string = ''
-  searchEmail : string = ''
-  searchDob : string = ''
+  searchName : any = ''
+  searchEmail : any = ''
+  searchDob : any = null
   public prevImagePath : any; 
   public nocontent: any = '';
  
   public users: User[] = [];
   public user : any = [];
-  searchForm !: FormGroup;
+
 
 
  
 
 
-  constructor(private userSvc: UserListsService,private dialog : MatDialog, private snack: MatSnackBar,private fg: FormBuilder,private router : Router) {
+  constructor(private userSvc: UserListsService,private dialog : MatDialog, private snack: MatSnackBar,private router : Router) {
     
    }
 
@@ -84,19 +83,20 @@ export class UserListsComponent implements OnInit {
       this.users = users;
       this.showData();
     }, error => {
-      console.log('ERROR :: ', error);
+      
     });
   }
 
 deleteUser(id: any): void {
-    console.log("Delete :: ", id)
+    
     this.userSvc.deleteUser(id).subscribe(resp=> {
         this.resp=resp;
         
-        console.log("Deleted Successfully",this.resp)
+        
         this.searchName = ''
         this.searchDob = ''
         this.searchEmail = ''
+        
     })
      
   
@@ -107,27 +107,24 @@ showData(): void {
 }
 editUser(id : any){
   sessionStorage.setItem('editid', id);
-  
-  
-  
-  console.log(id)
 }
 
   search() {
+    let searchNewDob = moment(this.searchDob).format('YYYY-MM-DD')
+    if(this.searchName == '' && this.searchEmail == '' && this.searchDob == null){
+     this.getUserList();
     
-    if(this.searchName == '' &&  this.searchEmail == '' && this.searchDob == ''){
-      this.getUserList();
     }
+    
     else{
-      this.searchDob = moment(this.searchDob).format('YYYY-MM-DD');
       const arr = {
       'name': this.searchName,
       'email': this.searchEmail,
-      'dob': this.searchDob,
+      'dob': searchNewDob,
    
   
     
-    }
+}
     
     this.userSvc.searchUser(arr).subscribe((user: User) => {
       
@@ -146,16 +143,12 @@ editUser(id : any){
     
 
     }
-    
-    
-    
-  
 }
 canclebutton(){
   this.getUserList();
   this.searchName = ''
   this.searchEmail = ''
-  this. searchDob = ''
+  this. searchDob = null
   this.router.navigateByUrl('userlists')
 }
   

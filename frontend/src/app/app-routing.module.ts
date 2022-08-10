@@ -61,7 +61,7 @@ const routes: Routes = [
   {
     path:'confirm-user',
     component:ConfirmUserComponent,
-    canActivate:[LoginGuard]
+    canActivate:[LoginGuard,RoleGuard]
   },
   {
     path:'edit-user',

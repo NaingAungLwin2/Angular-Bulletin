@@ -1,68 +1,77 @@
-<!-- <form action="">
-  <div class="row">
-    <mat-list role="list">
-      <div class="image-section"><img class="passport-image" [src]="url" *ngIf="url"  width="100px" height="100px"></div>
-      <mat-list-item role="listitem">Name</mat-list-item>
-      <mat-list-item role="listitem">Email</mat-list-item>
-      <mat-list-item role="listitem">DateofBirth</mat-list-item>
-
-      <mat-list-item role="listitem">Phone</mat-list-item>
-      <mat-list-item role="listitem">Address</mat-list-item>
-      <mat-list-item role="listitem">Type</mat-list-item>
-    </mat-list>
-
-    <mat-list role="list">
-      <mat-list-item role="listitem">{{ username }}</mat-list-item>
-      <mat-list-item role="listitem">{{ useremail }}</mat-list-item>
-      <mat-list-item role="listitem">{{ userdob | date }}</mat-list-item>
-
-      <mat-list-item role="listitem">{{ userphone }}</mat-list-item>
-      <mat-list-item role="listitem">{{ useraddress}}</mat-list-item>
-      <mat-list-item role="listitem" *ngIf="usertype == '1'">Admin</mat-list-item>
-      <mat-list-item role="listitem" *ngIf="usertype == '0'">User</mat-list-item>
-    </mat-list>
-  </div>
-</form>
-<button mat-raised-button color="primary" type="button" class="btn" (click)="userupdate()">Update</button>
-<button mat-raised-button color="warn" type="submit" class="btn" routerLink="/edit-user">Cancel</button> -->
-
-
-
 <div class="card">
   <img [src]="url" *ngIf="url">
+  <img alt="" src="../../assets/istockphoto-1184817738-170667a.jpg" *ngIf="!url" width="550px" height="550px">
+  <h2 class="head"></h2>
+
   <div class="container">
-    <mat-list role="list-left">
-   
-      
-      <mat-list-item role="listitem" class="list-left">Name</mat-list-item>
-      <mat-list-item role="listitem" class="list-left">Email</mat-list-item>
-      
-      <mat-list-item role="listitem" class="list-left">Date Of Birth</mat-list-item>
-      
-      <mat-list-item role="listitem" class="list-left">Phone</mat-list-item>
-      <mat-list-item role="listitem" class="list-left">Address</mat-list-item>
-      
-     
-      <mat-list-item role="listitem" class="list-left">Type</mat-list-item>
-      <button  mat-raised-button color="primary" type="button" class="btn-edit" (click)="userupdate()">Update</button>
+
+    <mat-list class="listall">
+
+      <div class="listitemleft">
+        <mat-list-item role="listitem" class="list-left">Name</mat-list-item>
+      </div>
+
+      <div class="listitemleft">
+        <mat-list-item role="listitem" class="list-left">Email</mat-list-item>
+
+      </div>
+
+      <div class="listitemleft">
+        <mat-list-item role="listitem" class="list-left">Date Of Birth</mat-list-item>
+      </div>
+
+      <div class="listitemleft">
+        <mat-list-item role="listitem" class="list-left">Phone</mat-list-item>
+      </div>
+
+      <div class="listitemleft">
+        <mat-list-item role="listitem" class="list-left">Address</mat-list-item>
+      </div>
+
+      <div class="listitemleft">
+        <mat-list-item role="listitem" class="list-left">Type</mat-list-item>
+      </div>
+
+
     </mat-list>
-  
-    <mat-list role="list-right">
-  
-      
-      <mat-list-item role="listitem" class="list-right">{{ username }}</mat-list-item>
-      <mat-list-item role="listitem" class="list-right">{{ useremail }}</mat-list-item>
-      <mat-list-item role="listitem" class="list-right">{{ userdob }}</mat-list-item>
-      <mat-list-item role="listitem" class="list-right">{{ userphone }}</mat-list-item>
-      
-      <mat-list-item role="listitem" class="list-right">{{ useraddress }}</mat-list-item>
-      <mat-list-item role="listitem" class="list-right" *ngIf="usertype == '1'" >Admin</mat-list-item>
-      <mat-list-item role="listitem" class="list-right" *ngIf="usertype == '0'">User</mat-list-item>
-      <button  mat-raised-button color="warn" type="submit" class="btn-cancle" routerLink="/edit-user">Cancel</button>
-      
+
+    <mat-list class="listall">
+
+      <div class="listitemright">
+        <mat-list-item role="listitem" class="list-right">{{ username }}</mat-list-item>
+      </div>
+
+      <div class="listitemright">
+        <mat-list-item role="listitem" class="list-right">{{ useremail }}</mat-list-item>
+      </div>
+
+      <div class="listitemright">
+        <mat-list-item role="listitem" class="list-right">{{ userdob }}</mat-list-item>
+
+      </div>
+
+      <div class="listitemright">
+        <mat-list-item role="listitem" class="list-right">{{ userphone }}</mat-list-item>
+
+      </div>
+
+      <div class="listitemright">
+        <mat-list-item role="listitem" class="list-right">{{ useraddress }}</mat-list-item>
+
+      </div>
+
+      <div class="listitemright">
+        <mat-list-item role="listitem" class="list-right" *ngIf="usertype == '1'">Admin</mat-list-item>
+        <mat-list-item role="listitem" class="list-right" *ngIf="usertype == '0'">User</mat-list-item>
+
+      </div>
     </mat-list>
+
+
+
   </div>
-  
-  
+  <div class="flex-container">
+    <button mat-raised-button color="primary" type="button" class="btn-edit" (click)="userupdate()">Update</button>
+    <button mat-raised-button color="warn" type="submit" class="btn-cancle" routerLink="/edit-user">Cancel</button>
+  </div>
 </div>
-  

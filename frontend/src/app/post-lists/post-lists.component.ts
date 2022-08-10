@@ -4,13 +4,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { PostService } from '../service/post.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Post } from 'model';
-import { Dialog } from '@angular/cdk/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup,FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularCsv } from 'angular-csv-ext/dist/Angular-csv';
-import { EventListenerFocusTrapInertStrategy } from '@angular/cdk/a11y';
+
 
 @Component({
   selector: 'app-post-lists',
@@ -19,7 +18,7 @@ import { EventListenerFocusTrapInertStrategy } from '@angular/cdk/a11y';
 })
 export class PostListsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  public displayedColumns: string[] = ['title', 'description','status','create_user_id','created_at','updated_at','edit','delete'];
+  public displayedColumns: string[] = ['title', 'description','created_at','updated_at','edit','delete'];
   public dataSource = new MatTableDataSource<Post>();
   public resp : string = ''; 
   public postid = sessionStorage.getItem('userId')
@@ -56,7 +55,7 @@ export class PostListsComponent implements OnInit {
         const a = document.createElement('a');
         a.click();
         a.remove();
-        this.getPostList()
+        
         this.snack.open("Succefully Deleted","Close",{
           duration: 2000
         })
@@ -69,6 +68,7 @@ export class PostListsComponent implements OnInit {
     console.log("Delete :: ", id)
     this.postService.deleteUser(id).subscribe(resp=> {
         this.resp=resp;
+        this.getPostList()
         console.log("Deleted Successfully",this.resp)
     })
      
@@ -133,7 +133,7 @@ editPosts(id : any):void{
   console.log(id)
 }
 toArray() {
-  //let post2Col = [];
+  this.post2Col = [];
   this.posts.forEach((value: any)=> {
     //console.log(value);
     var obj = {
@@ -157,12 +157,12 @@ downloadcsv():void{
   this.status = ["rejected", "pending", "approved"];
   
   var options = {
-    title: 'Post Detail',
+    
     fieldSeparator: ',',
     quoteStrings: '"',
     decimalseparator: '.',
     showLabels: true,
-    showTitle: true,
+    showTitle: false,
     useBom: true,
     headers: ['Title', 'Description']
   };

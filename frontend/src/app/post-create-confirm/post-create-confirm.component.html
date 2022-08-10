@@ -1,59 +1,70 @@
-<!-- <form action="" >
-    <div class="row">
-    <mat-list role="list">
-        <p>{{ posterid }}</p>
-        <mat-list-item role="listitem">Status</mat-list-item>
+<div class="card">
+  <h2 class="head">Post Create Confirm</h2>
 
-        <mat-list-item role="listitem">Title</mat-list-item>
-        <mat-list-item role="listitem">Description</mat-list-item>
-       
-      </mat-list>
-    
-      <mat-list role="list">
-        <mat-list-item role="listitem" *ngIf="poststatus == '1'">Active</mat-list-item>
-        <mat-list-item role="listitem" *ngIf="poststatus == '0'">Inactive</mat-list-item>
-        <mat-list-item role="listitem">{{ posttitle }}</mat-list-item>
-        <mat-list-item role="listitem">{{ postdescription }}</mat-list-item>
-       
-      </mat-list>
-    </div>
-    </form>
-    <button  (click)="postadd()" mat-raised-button color="primary" type="button" class="btn">Create</button>
-    <button  mat-raised-button color="warn" type="submit" class="btn" routerLink="/user_add" (click)="cancleuser()">Cancel</button>
-    
-    
-     -->
-     
-     <div class="card">
-      <h2 class="head">Post Create</h2>
-    
-    <div class="container">
-      
-      <mat-list role="list-left">
-     
-        
+  <div class="container">
+    <mat-list class="listall">
+      <div class="listitemleft">
         <mat-list-item role="listitem" class="list-left">Title</mat-list-item>
-        <mat-list-item role="listitem" class="list-left">Description</mat-list-item>
+      </div>
+
+      <div class="listitemleft">
+        <mat-list-item role="listitem" class="list-left"
+          >Description</mat-list-item
+        >
+      </div>
+
+      <div class="listitemleft">
         <mat-list-item role="listitem" class="list-left">Status</mat-list-item>
-        
-       
-        <button  mat-raised-button color="primary" type="button" class="btn-edit" (click)="postadd()">Create</button>
-      </mat-list>
-    
-      <mat-list role="list-right">
-    
-        
-        <mat-list-item role="listitem" class="list-right">{{ posttitle }}</mat-list-item>
-        <mat-list-item role="listitem" class="list-right">{{ postdescription }}</mat-list-item>
-        
-        <mat-list-item role="listitem" *ngIf="poststatus == '1'" class="list-right">Active</mat-list-item>
-        <mat-list-item role="listitem" *ngIf="poststatus == '0'" class="list-right">Inactive</mat-list-item>
-        <button  mat-raised-button color="warn" type="submit" class="btn-cancle"  (click)="cancleuser()">Cancel</button>
-        
-      </mat-list>
-    </div>
-    
-    
+      </div>
+    </mat-list>
+
+    <mat-list class="listall">
+      <div class="listitemright">
+        <mat-list-item role="listitem" class="list-right">{{
+          posttitle
+        }}</mat-list-item>
+      </div>
+
+      <div class="listitemright">
+        <mat-list-item role="listitem" class="list-right">{{
+          postdescription
+        }}</mat-list-item>
+      </div>
+
+      <div class="listitemright">
+        <mat-list-item
+          role="listitem"
+          *ngIf="poststatus == '1'"
+          class="list-right"
+          >Active</mat-list-item
+        >
+        <mat-list-item
+          role="listitem"
+          *ngIf="poststatus == '0'"
+          class="list-right"
+          >Inactive</mat-list-item
+        >
+      </div>
+    </mat-list>
   </div>
-    
-    
+  <div class="flex-container">
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      class="btn-edit"
+      (click)="postadd()"
+    >
+     Confirm
+    </button>
+    <button
+      mat-raised-button
+      color="warn"
+      type="submit"
+      class="btn-cancle"
+      (click)="cancleuser()"
+    >
+      Cancel
+    </button>
+  </div>
+</div>

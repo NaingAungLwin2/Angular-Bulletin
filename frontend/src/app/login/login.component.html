@@ -1,43 +1,40 @@
-
 <div class="card-con">
-    <form class="example-form container" [formGroup]="loginForm" novalidate>
-        <h2 class="head">Login</h2>
-        <mat-form-field class="example-full-width"  appearance="standard">
-          <mat-label>Email</mat-label>
-         
-          <input matInput placeholder="UserName" formControlName="email"  [(ngModel)]="personEmail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required >
-          
-            <mat-error *ngIf="loginForm.controls['email'].errors?.['required']">Email Required</mat-error>
+  <form class="example-form container" [formGroup]="loginForm" novalidate>
+    <h2 class="head">Login</h2>
+    <mat-form-field class="example-full-width" appearance="standard">
+      <mat-label>Email</mat-label>
 
-            <mat-error *ngIf="loginForm.controls['email'].errors?.['pattern']">Email Format isn`t correct</mat-error>
-            
+      <input matInput placeholder="UserName" formControlName="email" [(ngModel)]="personEmail"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
 
-            
-         
-          
-        </mat-form-field>
-    
-        
-          <mat-form-field appearance="fill" class="example-full-width" appearance="standard" >
-            <mat-label>Password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password" [(ngModel)]="personPassword" minlength="6" required>
-    
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-             <mat-error *ngIf="loginForm.controls['password'].errors?.['required']">Password Required</mat-error>
+      <mat-error *ngIf="loginForm.controls['email'].errors?.['required']">Email Required</mat-error>
 
-             <mat-error *ngIf="loginForm.controls['password'].errors?.['minlength']">Password must be at least 5 characters</mat-error>
+      <mat-error *ngIf="loginForm.controls['email'].errors?.['pattern']">Email Format isn`t correct</mat-error>
 
-             <mat-error></mat-error>
-          </mat-form-field>
-    
-          <button  (click)="login()"
-          mat-raised-button color="primary" type="button" class="btn" [disabled]="loginForm.invalid" >Login</button>
-      
-          
-      </form>
-     
-    </div>
-       
-    
+    </mat-form-field>
+
+
+    <mat-form-field appearance="fill" class="example-full-width" appearance="standard">
+      <mat-label>Password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password"
+        [(ngModel)]="personPassword" minlength="6" required>
+
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="loginForm.controls['password'].errors?.['required']">Password Required</mat-error>
+
+      <mat-error *ngIf="loginForm.controls['password'].errors?.['minlength']">Password must be at least 5 characters
+      </mat-error>
+
+      <mat-error></mat-error>
+    </mat-form-field>
+
+    <button (click)="login()" mat-raised-button color="primary" type="button" class="btn"
+      [disabled]="loginForm.invalid">Login</button>
+
+
+  </form>
+
+</div>

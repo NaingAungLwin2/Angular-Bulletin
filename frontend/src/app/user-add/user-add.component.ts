@@ -20,8 +20,8 @@ import { ParamDataService } from '../service/param-data.service';
 })
 export class UserAddComponent{
   
-  data = [];
-  logindata = [];
+  
+  
   hide = true;
   isLoadingResults = true;
   UserForm !: FormGroup;
@@ -137,11 +137,11 @@ get conpassword(){
 checkEmail(email:string): void {
   this.userService.checkEmail(email).then(res => {
     if (res) {
-      console.log('Same email ==> ',res);
+      
       alert('This email is already exist.')
     }
     else {
-      console.log('Same email ==> ',res)
+      
       this.routes.navigateByUrl('confirm-user');
     }
   }).catch(error => {

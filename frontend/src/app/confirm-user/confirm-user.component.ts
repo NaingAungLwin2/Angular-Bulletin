@@ -65,10 +65,7 @@ export class ConfirmUserComponent implements OnInit {
   
   }
   cancleuser(){
-    
-    
-    this.router.navigateByUrl('user_add')
-   
+  this.router.navigateByUrl('user_add')
   }
   
 

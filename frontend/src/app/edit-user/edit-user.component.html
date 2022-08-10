@@ -2,15 +2,17 @@
 <h2 class="head">User Edit</h2>
 <div class="card-con">
   <div class="card_img">
-    <img alt="user-image" [src]="prevImagePath" *ngIf="!url" >
-    <img alt="user-image"[src]="url" *ngIf="url">
+    <img alt="i" [src]="prevImagePath" *ngIf="!url" >
+    <img alt="i" [src]="url" *ngIf="url">
+    <img alt="i" src="../../assets/istockphoto-1184817738-170667a.jpg" *ngIf="!url">
+    
 </div>
 
 <form class="example-form container" [formGroup]="UserForm">
     
    
     
-
+  <input #imageInput type="file" class="form-control img-input" accept="image/*" placeholder="Select images" (change)="onChangeImage($event)">
     
 
     <mat-form-field class="example-full-width" appearance="standard">
@@ -52,29 +54,12 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Phone</mat-label>
-          <input matInput placeholder="09xxxxxxxxx" name="phone" id="phone" formControlName="phone" [(ngModel)]="user.phone">
-          <mat-error *ngIf="UserForm.controls['phone'].invalid && (UserForm.controls['phone'].dirty || UserForm.controls['phone'].touched)" class="invalid-feedback">
-          <mat-error *ngIf="UserForm.controls['phone'].errors?.['required']">
-              This field is required.
-          </mat-error>
-          <mat-error *ngIf="UserForm.controls['phone'].errors?.['pattern']">
-            Please insert 11 digits.
-        </mat-error>
-          </mat-error>
-      </mat-form-field> -->
-
-
-
-
     <mat-form-field class="example-full-width" appearance="standard">
       <mat-label>Address</mat-label>
       <textarea matInput placeholder="Your Address" name="address" id="address" formControlName="address" [(ngModel)]="user.address">
       </textarea>
       <mat-error *ngIf="address?.invalid && (address?.dirty || address?.touched)" class="invalid-feedback">
         <mat-error *ngIf="address?.errors?.['required']">Address Required</mat-error>
-
       </mat-error>
     </mat-form-field>
 
@@ -97,33 +82,18 @@
 
     <mat-form-field appearance="standard" class="example-full-width">
       <mat-label>Select Options</mat-label>
-
       <mat-select formControlName="type" [(ngModel)]="nrtype">
-
         <mat-option value="1" selected>Admin</mat-option>
         <mat-option value="0">User</mat-option>
       </mat-select>
-
-
-
     </mat-form-field>
 
-
-    <a type="button" name="password" formControlName="password" (click)="passwordrest()">Password Reset</a>
-
-
-    <input #imageInput type="file" class="form-control" accept="image/*" placeholder="Select images" (change)="onChangeImage($event)">
-
+    <div>
+      <a type="button" name="password" formControlName="password" (click)="passwordrest()" class="password">Password Reset</a>
+    </div>
     
-
-    
-
-
-
     <button mat-raised-button color="primary" type="submit" class="btn" [disabled]="UserForm.invalid" (click)="editUser()">Edit</button>
-
-
-  </form>
+</form>
 
 </div>
 </div>

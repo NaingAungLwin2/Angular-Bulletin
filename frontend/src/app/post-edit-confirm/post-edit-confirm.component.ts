@@ -24,11 +24,7 @@ export class PostEditConfirmComponent implements OnInit {
       title: this.posttitle,
       description: this.postdescription,
       status:this.poststatus
-      
-      
-     
-     
-    };
+      };
     
       this.postService.postUpdate(post).subscribe((data) => {
         this.posts.unshift(data);

@@ -1,115 +1,108 @@
-
 <div class="search-con">
-<form>
+  <form>
+    <mat-form-field class="search">
+      <input
+        matInput
+        placeholder="Title"
+        name="searchTitle"
+        [(ngModel)]="searchTitle"
+      />
+    </mat-form-field>
 
-  <mat-form-field class="search">
-    <input matInput  placeholder="Title" name="searchTitle"  [(ngModel)]="searchTitle">
-   </mat-form-field>
+    <mat-form-field class="search">
+      <input
+        matInput
+        placeholder="Description"
+        name="searchDescription"
+        [(ngModel)]="searchDescritption"
+      />
+    </mat-form-field>
 
+    <button mat-raised-button color="primary" (click)="search()" class="btn">
+      Search
+    </button>
 
+    <button mat-raised-button color="warn" (click)="canclebutton()" class="btn">
+      Cancle
+    </button>
 
-<mat-form-field class="search">
-  <input matInput  placeholder="Description" name="searchDescription" [(ngModel)]="searchDescritption ">
-  </mat-form-field>
-
-
-
-<!-- <mat-form-field class="search calender">
-  <input matInput [matDatepicker]="picker" name="searchDob" id="date" placeholder="mm/dd/yyyy" [(ngModel)]="searchDob">
-<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-<mat-datepicker #picker></mat-datepicker>
-</mat-form-field> -->
-
-<button mat-raised-button color="primary"  (click)="search()" class="btn">Search</button>
-
-<button mat-raised-button color="warn" (click)="canclebutton()" class="btn">Cancle</button>
-
-<button mat-raised-button color="primary" (click)="downloadcsv()" class="btn">Download</button>
-
-
-
-</form>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="downloadcsv()"
+      class="btn"
+    >
+      Download
+    </button>
+  </form>
 </div>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
-    
-        <!-- ID Column -->
-       
-        <!-- Name Column -->
-        <ng-container matColumnDef="title">
-            <th mat-header-cell *matHeaderCellDef>Title</th>
-            <td mat-cell *matCellDef="let post">{{post.title}}</td>
-        </ng-container>
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Title</th>
+    <td mat-cell *matCellDef="let post">{{ post.title }}</td>
+  </ng-container>
 
-        <!-- Email Column -->
-        <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef>Description</th>
-            <td mat-cell *matCellDef="let post">{{post.description}}</td>
-        </ng-container>
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>Description</th>
+    <td mat-cell *matCellDef="let post">{{ post.description }}</td>
+  </ng-container>
 
-        <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef>Status</th>
-            <td mat-cell *matCellDef="let post">{{post.status}}</td>
-        </ng-container>
+  <ng-container matColumnDef="created_at">
+    <th mat-header-cell *matHeaderCellDef>Created_At</th>
+    <td mat-cell *matCellDef="let post">
+      {{ post.created_at | date: "YYYY/MM/dd" }}
+    </td>
+  </ng-container>
 
-        <ng-container matColumnDef="created_at">
-            <th mat-header-cell *matHeaderCellDef>Created_At</th>
-            <td mat-cell *matCellDef="let post">{{post.created_at | date:'YYYY/MM/dd'}}</td>
-        </ng-container>
+  <ng-container matColumnDef="updated_at">
+    <th mat-header-cell *matHeaderCellDef>Updated_At</th>
+    <td mat-cell *matCellDef="let post">
+      {{ post.updated_at | date: "YYYY/MM/dd" }}
+    </td>
+  </ng-container>
 
-        <ng-container matColumnDef="updated_at">
-            <th mat-header-cell *matHeaderCellDef>Updated_At</th>
-            <td mat-cell *matCellDef="let post">{{post.updated_at | date:'YYYY/MM/dd'}}</td>
-        </ng-container>
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef class="notice-msg-header"></th>
+    <td mat-cell *matCellDef="let post">
+      <div class="edit">
+        <button
+          mat-fab
+          color="primary"
+          aria-label="Example icon button with a delete icon"
+          class="icon"
+          (click)="editPosts(post.id)"
+          *ngIf="role == '1' || post.create_user_id == postid"
+        >
+          <mat-icon>account_box</mat-icon>
+        </button>
+      </div>
+    </td>
+  </ng-container>
 
-        <ng-container matColumnDef="create_user_id">
-            <th mat-header-cell *matHeaderCellDef>Create User Id</th>
-            <td mat-cell *matCellDef="let post">{{post.create_user_id}}</td>
-        </ng-container>
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef class="notice-msg-header"></th>
+    <td mat-cell *matCellDef="let post">
+      <div class="delete">
+        <button
+          mat-fab
+          color="warn"
+          aria-label="Example icon button with a delete icon"
+          class="icon"
+          *ngIf="role == '1' || post.create_user_id == postid"
+        >
+          <mat-icon (click)="openDialog(post.id)">delete</mat-icon>
+        </button>
+      </div>
+    </td>
+  </ng-container>
 
-
-        
-
-
-
-        
-
-        <ng-container matColumnDef="edit">
-            <th mat-header-cell *matHeaderCellDef class="notice-msg-header"></th>
-            <td mat-cell *matCellDef="let post">
-                <div class="edit">
-                    
-                        <button mat-fab color="primary" aria-label="Example icon button with a delete icon" class="icon" (click)="editPosts(post.id)" *ngIf="role == '1' || post.create_user_id == postid">
-                            <mat-icon>account_box</mat-icon>
-                          </button>
-                        
-                    
-                    
-                </div>
-            </td>
-        </ng-container>
-
-        <ng-container matColumnDef="delete">
-            <th mat-header-cell *matHeaderCellDef class="notice-msg-header"></th>
-            <td mat-cell *matCellDef="let post">
-                <div class="delete">
-                    <button mat-fab color="warn" aria-label="Example icon button with a delete icon" class="icon" *ngIf="role == '1' || post.create_user_id == postid" >
-                        <mat-icon (click)="openDialog(post.id)">delete</mat-icon>
-                      </button>
-                    
-                </div>
-            </td>
-        </ng-container>
-
-
-        
-      
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
-<mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                 showFirstLastButtons 
-                 aria-label="Select page of periodic elements">
-  </mat-paginator>
-
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 20, 100]"
+  showFirstLastButtons
+  aria-label="Select page of periodic elements"
+>
+</mat-paginator>

@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ParamDataService {
   partnerData: any;
+  loginRole : any ;
   constructor() { }
 
   setPartnerData(val: string[] = []) {
@@ -13,5 +14,13 @@ export class ParamDataService {
 
   getPartnerData() {
     return this.partnerData;
+  }
+
+  setLoginRoleData(val: any){
+    this.loginRole = val;
+  }
+  getLoginRoleData(){
+    return this.loginRole;
+
   }
 }

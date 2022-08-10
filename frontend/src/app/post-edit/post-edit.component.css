@@ -1,35 +1,31 @@
-.container{
-    margin:0 auto;
-    
+.container {
+  margin: 0 auto;
 }
-.card-con{
-    margin:0 auto;
-    background-color: rgb(243, 246, 255);
-    width:38%;
-    border-radius:1em;
-    margin-top:100px;
-    
-    
+.card-con {
+  margin: 0 auto;
+  background-color: rgb(243, 246, 255);
+  width: 38%;
+  border-radius: 1em;
+  margin-top: 100px;
 }
 .example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-    
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
 }
-  
+
 .example-full-width {
-    width: 100%;
-    margin-top:30px;
+  width: 100%;
+  margin-top: 30px;
 }
-.btn{
-    width:100%;
-    padding:5px;
-    margin-top:30px;
-    margin-bottom :60px;
+.btn {
+  width: 100%;
+  padding: 5px;
+  margin-top: 30px;
+  margin-bottom: 60px;
 }
-.head{
-    text-align:center;
-    color:rgb(64, 64, 172);
-    padding-top:30px;
+.head {
+  text-align: center;
+  color: rgb(64, 64, 172);
+  padding-top: 30px;
 }

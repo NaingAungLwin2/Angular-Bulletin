@@ -8,17 +8,11 @@ import { LoginAuthService } from '../service/login.service';
 })
 export class LoginGuard implements CanActivate {
   constructor( private routes: Router, private authService:LoginAuthService ){}
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot)
-    : Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log('----hii----');
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       if (this.authService.isLoggedIn()) {
-        console.log('----true-----');
-        
         return true;
       } else {
-        console.log('----false-----');
         this.routes.navigate(['/']);
-        
         return false;
       }
   }

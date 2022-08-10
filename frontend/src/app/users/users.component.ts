@@ -10,12 +10,15 @@ import { BehaviorSubject } from 'rxjs';
 export class UsersComponent implements OnInit {
   public loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public role = sessionStorage.getItem('userRole')
+  public paraid : any;
   data = [];
   isLoadingResults = true;
   constructor(
     
     private userService: UserService
-  ) { }
+  ) {  
+       
+  }
   
   ngOnInit(): void {
     if (!localStorage.getItem('foo')) { 
@@ -24,11 +27,13 @@ export class UsersComponent implements OnInit {
     } else {
       localStorage.removeItem('foo') 
     }
-    console.log('kkkkkk')
+   
     this.userService.getUsers().subscribe((res: any) => {
       this.data = res;
       
-      console.log(this.data);
+      
+      
+      
      
       this.isLoadingResults = false;
       this.loggedIn.next(false)
